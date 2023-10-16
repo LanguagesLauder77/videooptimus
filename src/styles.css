@@ -1,0 +1,77 @@
+.card {
+    width: 60%; /* Adjust the width to reduce the card size */
+    margin: 0 auto; /* Center the card in the column */
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* LambdaInvoker.css */
+.invoke-button {
+    margin-bottom: 1rem;
+  }
+  
+  .reset-button {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+  }
+  
+  /* styles.css */
+
+/* Table Header Styles */
+.table thead th {
+  background-color: #343a40;  /* Dark background */
+  color: #ffffff;  /* White text */
+  padding: 12px 8px;
+}
+
+/* Alternate Row Colors */
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Row Hover Effect */
+.table tbody tr:hover {
+  background-color: #e6e6e6;
+}
+
+/* Image Styles */
+.table img {
+  border-radius: 5px;
+}
+
+.app-container {
+  font-family: 'Arial', sans-serif; /* Replace with a font from Google Fonts, if desired */
+  background-color: #f5f5f5; /* Soft gray, or choose another color */
+  padding: 20px;
+}
+
+.content-section {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+
+.bounding-box {
+  border: 1px solid #ddd; /* Light grey border */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 20px;
+  margin-bottom: 20px; /* Space between the box and the content below it */
+  text-align: center; /* Center the content */
+}
+
+.bounding-box-title {
+  margin-bottom: 5px; /* Space between the title and the combo box */
+  font-size: 1.5em; /* Make the title a bit larger */
+}
+.custom-button-color {
+  background-color: #664F3A !important;
+  border-color: #664F3A !important;
+  /* If you want to change the color of text on the button, use the color property */
+  color: #ffffff !important; 
+}

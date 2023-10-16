@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Creative from './Creative';
+import FileUpload from './FileUpload';
+import HomePage from './HomePage';
+import Bestsellar from './Bestsellar';
+import Combine from './Combine';
+import LoginPage from './LoginPage'; // import your login page component
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+    <Routes>
+          <Route path="/" element={<LoginPage  />} />
+          <Route path="/HomePage" element={<HomePage  />} />
+          <Route path="/FileUpload" element={<FileUpload />} />
+          <Route path="/Creative" element={<Creative />} />
+          <Route path="/Bestsellar" element={<Bestsellar />} />
+          <Route path="/Combine" element={<Combine   />} />
+        </Routes>
+  </Router>
   );
 }
 
