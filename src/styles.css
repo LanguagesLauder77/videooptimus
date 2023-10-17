@@ -70,8 +70,55 @@
   font-size: 1.5em; /* Make the title a bit larger */
 }
 .custom-button-color {
-  background-color: #664F3A !important;
-  border-color: #664F3A !important;
+  background-color: #704f37 !important;
+  border-color: #704f37 !important;
   /* If you want to change the color of text on the button, use the color property */
   color: #ffffff !important; 
+}
+.navbar-custom {
+  background-color: #704f37; 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;/* Your preferred color */
+}
+
+/* change navbar brand and link colors */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+/* change color of toggler icon */
+.navbar-custom .navbar-toggler {
+  background-color: #ffffff;
+}
+
+/* Navbar link hover effect */
+.navbar-custom .navbar-nav .nav-link:hover,
+.navbar-custom .navbar-nav .nav-link:focus {
+  color: #ffd700; /* Your preferred hover color */
+  text-decoration: none;
+  transition: color 0.3s ease-in-out; /* Adds a smooth color transition */
+}
+.navbar-text {
+  color: rgb(255, 255, 255); /* or any other color */
+  /* other styles */
+}
+.custom-table {
+  background-color: #ffffff; /* Replace with your preferred color */
+}
+
+.custom-table th,
+.custom-table td {
+  border-color: #704f37; /* Adjust if you want the borders to be a different color */
+}
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Adjust this value to change the vertical spacing */
+  text-align: center;
+}
+
+.center-screen h2 {
+  margin-bottom: 0; /* Optional: removes the bottom margin of the h2 tag for closer spacing */
 }

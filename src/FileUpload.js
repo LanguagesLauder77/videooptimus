@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AWS from 'aws-sdk';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; // Import axios for fetching the CSV
-
+import loginImage from './logo4.png'; 
 // AWS Configuration (Replace with your configurations)
 AWS.config.update({
   accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
@@ -84,36 +84,70 @@ function FileUpload() {
     }
   };
 
+  const exportToCsv = (filename, rows) => {
+    const processRow = (row) => {
+        return row.map((element) => {
+            return '"' + element.replace(/"/g, '""') + '"';
+        }).join(',');
+    };
+
+    let csvContent = rows.map(processRow).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, filename);
+    } else {
+        const link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection, works in most modern browsers
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+}
+
+
+
+
   return (
     <div className="container">
-       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">PACT</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Operation</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Creative</a>
-            </li>
-            
-          </ul>
-        </div>
-      </nav>
 
+          <nav className="navbar navbar-expand-lg navbar-custom">
+    <a className="navbar-brand" href="#">
+    <img src={loginImage} alt="Logo" width="50" height="50" className="d-inline-block align-top" />
+      </a>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+            <li className="nav-item active">
+                <a className="nav-link" href="./HomePage">Home <span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item active">
+                <a className="nav-link" href="./FileUpload">Operations</a>
+            </li>
+            <li className="nav-item active">
+                <a className="nav-link" href="./Combine">Creative</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+       {/* Alert Box */}
+       <div className="alert alert-light mt-3" role="alert">
+      <strong>Note :</strong> File should be in CSV format (ASIN, TITLE, PRODUCT_GL, PRODUCT TYPE).
+   </div>
       <div className="my-3">
       
         <input type="file" onChange={handleFileChange} className="form-control" />
       </div>
 
       <div className="text-center">
-        <button onClick={handleUpload} disabled={!file || uploading} className="btn btn-primary mb-3">
+        <button onClick={handleUpload} disabled={!file || uploading}  className="custom-button-color mb-3">
           {uploading ? 'Uploading...' : 'Upload'}
         </button>
 
@@ -125,25 +159,38 @@ function FileUpload() {
       </div>
 
       {csvData.length > 0 && (
-        <table className="table table-striped mt-3">
-          <thead>
-            <tr>
-              {csvData[0].map((header, index) => (
-                <th key={index}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {csvData.slice(1).map((row, index) => (
-              <tr key={index}>
-                {row.map((cell, index) => (
-                  <td key={index}>{cell}</td>
+    <div>
+        <table className="table table-striped mt-3 custom-table">
+            <thead>
+                <tr>
+                {csvData[0].map((header, index) => (
+                    <th key={index}>{header}</th>
                 ))}
-              </tr>
-            ))}
-          </tbody>
+                </tr>
+            </thead>
+            <tbody>
+                {csvData.slice(1).map((row, index) => (
+                <tr key={index}>
+                    {row.map((cell, index) => (
+                    <td key={index}>{cell}</td>
+                    ))}
+                </tr>
+                ))}
+            </tbody>
         </table>
-      )}
+        <div className="text-center"> {/* This div is used to center the button */}
+            <button 
+              onClick={() => exportToCsv('data_export.csv', csvData)} 
+              className="custom-button-color"
+            >
+                Export as CSV
+            </button>
+        </div>
+    </div>
+)}
+
+
+      
     </div>
   );
 }

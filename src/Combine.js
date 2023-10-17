@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AWS from 'aws-sdk';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
+import loginImage from './logo4.png'; 
 
 // Configure AWS SDK
 AWS.config.update({
@@ -125,35 +126,54 @@ function MergedComponent() {
           setError('Please select a category before invoking the lambda function.');
         }
       }
-
+      const resetBestSellerData = () => {
+        setData([]);
+        setAlias("");
+        setLoading(false);
+        setError(null);
+    };
+    
     return (
-        <div className="app-container">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">PACT</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+        <div className="container">
+             <nav className="navbar navbar-expand-lg navbar-custom">
+    <a className="navbar-brand" href="#">
+    <img src={loginImage} alt="Logo" width="50" height="50" className="d-inline-block align-top" />
+      </a>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                <a className="nav-link" href="./HomePage">Home <span className="sr-only">(current)</span></a>
             </li>
-        
-          </ul>
+            <li className="nav-item active">
+                <a className="nav-link" href="./FileUpload">Operations</a>
+            </li>
+            <li className="nav-item active">
+                <a className="nav-link" href="./Combine">Creative</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div className="mt-3">
+            <h2>Relative Attributes</h2>
+           
         </div>
-            </nav>
-
             {/* LambdaInvoker Section */}
             <div className="content-section">
                 <select value={filterValue} onChange={handleChange} className="form-select mb-3">
                     <option value="">Select a filter</option>
                     <option value="BOOK">BOOK</option>
-                    <option value="AXE">AXE</option>
-                    <option value="BASKET">BASKET</option>
+                    <option value="APPAREL">APPAREL</option>
+                    <option value="PERSONAL_COMPUTER">PERSONAL COMPUTER</option>
+                    <option value="FOOD">FOOD</option>
+                    <option value="CONSUMER_ELECTRONICS">CONSUMER ELECTRONICS</option>
                     <option value="SHOES">SHOES</option>
+                   
                 </select>
-                <button onClick={invokeLambdaFunction} className="btn btn-dark mb-3 invoke-button">Submit</button>
-                <button onClick={resetData} className="btn btn-dark mb-3 ml-3 reset-button">Reset</button>
+                <button onClick={invokeLambdaFunction} className="custom-button-color mb-3 invoke-button">Submit</button>
+                <button onClick={resetData} className="custom-button-color mb-3 ml-3 reset-button">Reset</button>
                 {result && (
                     <div>
                         <h2>Result:</h2>
@@ -170,20 +190,24 @@ function MergedComponent() {
                     </div>
                 )}
             </div>
-
+            <div className="mt-3">
+            <h2>Best Sellar</h2>
+           
+        </div>      
             {/* DataTable Section */}
             <div className="content-section">
+            <button onClick={resetBestSellerData} className="custom-button-color mb-3">Reset Best Seller Data</button>
         <select className="form-select" onChange={(e) => setAlias(e.target.value)}>
           <option value="">Select a category</option>
           
         <option value="apparel">Apparel</option>
-        <option value="baby">Baby</option>
-        <option value="luggage">Bags, Wallets and Luggage</option>
+        <option value="shoes">Shoes & Handbags</option>
+        <option value="grocery">Grocery & Gourment Foods</option>
         <option value="beauty">Beauty</option>
         <option value="automotive">Car & Motorbike</option>
         <option value="computers">Computers & Accessories</option>
         <option value="electronics">Electronics</option>
-        <option value="kitchen">Home & Kitchen</option>
+        <option value="books">Books</option>
         </select>
        
       </div>
@@ -193,7 +217,7 @@ function MergedComponent() {
       ) : error ? (
         <p className="text-danger">Error: {error}</p>
       ) : (
-        <table className="table">
+        <table className="table custom-table">
           <thead>
             <tr>
               <th>ASIN</th>
