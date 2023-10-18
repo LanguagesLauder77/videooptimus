@@ -4,6 +4,7 @@ import AWS from 'aws-sdk';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; // Import axios for fetching the CSV
 import loginImage from './logo4.png'; 
+import { NavLink } from 'react-router-dom';
 // AWS Configuration (Replace with your configurations)
 AWS.config.update({
   accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
@@ -115,40 +116,43 @@ function FileUpload() {
   return (
     <div className="container">
 
-          <nav className="navbar navbar-expand-lg navbar-custom">
+<nav className="navbar navbar-expand-lg navbar-custom">
     <a className="navbar-brand" href="#">
-    <img src={loginImage} alt="Logo" width="50" height="50" className="d-inline-block align-top" />
-      </a>
+        <img src={loginImage} alt="Logo" width="70" height="70" className="d-inline-block align-top" />
+    </a>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-            <li className="nav-item active">
-                <a className="nav-link" href="./HomePage">Home <span className="sr-only">(current)</span></a>
+        <ul className="navbar-nav ms-auto">
+            <li className="nav-item" style={{padding: "10px"}}>
+                <NavLink exact to="/HomePage" className="nav-link" activeClassName="active-link">Home</NavLink>
             </li>
-            <li className="nav-item active">
-                <a className="nav-link" href="./FileUpload">Operations</a>
+            <li className="nav-item" style={{padding: "10px"}}>
+                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link">Operations</NavLink>
             </li>
-            <li className="nav-item active">
-                <a className="nav-link" href="./Combine">Creative</a>
+            <li className="nav-item" style={{padding: "10px"}}>
+                <NavLink to="/Combine" className="nav-link" activeClassName="active-link">Creative</NavLink>
             </li>
         </ul>
     </div>
 </nav>
 
        {/* Alert Box */}
-       <div className="alert alert-light mt-3" role="alert">
-      <strong>Note :</strong> File should be in CSV format (ASIN, TITLE, PRODUCT_GL, PRODUCT TYPE).
-   </div>
+       
       <div className="my-3">
       
         <input type="file" onChange={handleFileChange} className="form-control" />
       </div>
-
+      
+      <p className="note-text">
+  Note: Please use the provided
+  <a href="https://f.io/rbSoYEMO" target="_blank" rel="noopener noreferrer">  template </a> 
+  without altering the format, and note that during the pilot, the maximum number of ASINs to be processed is limited to 50.
+</p>  
       <div className="text-center">
         <button onClick={handleUpload} disabled={!file || uploading}  className="custom-button-color mb-3">
-          {uploading ? 'Uploading...' : 'Upload'}
+          {uploading ? 'UPLOADING...' : 'UPLOAD'}
         </button>
 
         {uploading && (

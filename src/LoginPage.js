@@ -12,8 +12,8 @@ function LoginPage() {
   const [error, setError] = useState(false);
 
   // Hardcoded username and password
-  const correctUsername = 'admin';
-  const correctPassword = 'password';
+  const correctUsername = 'loewycore';
+  const correctPassword = 'Ph0t0DEL19';
 
   // For navigation
   const navigate = useNavigate();
