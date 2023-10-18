@@ -21,10 +21,7 @@ function FileUpload() {
   const [lambdaOutput, setLambdaOutput] = useState(null);
   const [csvData, setCsvData] = useState([]);
  
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
-  
+
    
   const handleUpload = async () => {
     try {
@@ -60,7 +57,7 @@ function FileUpload() {
           // Adding a delay of 5 seconds before checking the CSV file
           setTimeout(() => {
             fetchCsvData();
-          }, 10000);
+          }, 20000);
         }
       });
 
@@ -70,7 +67,7 @@ function FileUpload() {
       setTimeout(() => {
         setUploading(false);
         setProgress(0);
-      }, 10000);
+      }, 20000);
     }
   };
 
@@ -85,6 +82,23 @@ function FileUpload() {
     }
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+  
+    if (file) {
+      // Check if the file is a CSV by checking the MIME type
+      // Some browsers use the MIME type 'application/vnd.ms-excel' for CSV files
+      if (file.type === "text/csv" || file.type === "application/vnd.ms-excel") {
+        // It's a CSV file, set your file state
+        setFile(file);
+      } else {
+        // It's not a CSV file, handle error
+        console.error("File is not a CSV");
+        // Optionally, clear the file input here
+        event.target.value = null;
+      }
+    }
+  };
   const exportToCsv = (filename, rows) => {
     const processRow = (row) => {
         return row.map((element) => {
@@ -142,7 +156,7 @@ function FileUpload() {
        
       <div className="my-3">
       
-        <input type="file" onChange={handleFileChange} className="form-control" />
+        <input type="file" onChange={handleFileChange} className="form-control" accept=".csv,text/csv"  />
       </div>
       
       <p className="note-text">
