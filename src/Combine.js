@@ -191,7 +191,7 @@ function MergedComponent() {
                 )}
             </div>
             <div className="mt-3">
-            <h2>Best Sellar</h2>
+            <h2>Best Seller</h2>
            
         </div>      
             {/* DataTable Section */}
