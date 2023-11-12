@@ -32,9 +32,11 @@ function MergedComponent() {
 
         try {
             const lambdaResult = await lambda.invoke(params).promise();
-            console.log('Lambda result:', lambdaResult); // Log raw lambda result
             const parsedResult = JSON.parse(lambdaResult.Payload);
-            console.log('Parsed result:', parsedResult); // Log parsed result
+            // Parse the body if it's a string
+            if (typeof parsedResult.body === 'string') {
+                parsedResult.body = JSON.parse(parsedResult.body);
+            }
             setResult(parsedResult);
         } catch (error) {
             console.error('Error invoking Lambda function:', error);
@@ -44,19 +46,18 @@ function MergedComponent() {
 
     // Render the result in table format
     const renderResult = () => {
-        console.log('Rendering result:', result); // Log the result being rendered
-        if (result && result.body && Array.isArray(result.body)) {
+        if (result && result.body && Array.isArray(result.body.csv_data)) {
             return (
                 <table className="table">
                     <thead>
                         <tr>
-                            {Object.keys(result.body[0]).map((key, index) => (
+                            {Object.keys(result.body.csv_data[0]).map((key, index) => (
                                 <th key={index}>{key}</th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {result.body.map((item, index) => (
+                        {result.body.csv_data.map((item, index) => (
                             <tr key={index}>
                                 {Object.values(item).map((value, idx) => (
                                     <td key={idx}>{value}</td>
@@ -72,7 +73,11 @@ function MergedComponent() {
 
     return (
         <div className="container">
-            {/* Navbar and other content */}
+            <nav className="navbar navbar-expand-lg navbar-custom">
+                {/* Navbar content */}
+            </nav>
+
+            {/* ASIN Input and Lambda Invocation Section */}
             <div className="content-section mt-3">
                 <h2>Enter ASIN</h2>
                 <input 
