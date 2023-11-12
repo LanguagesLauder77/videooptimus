@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import AWS from 'aws-sdk';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css'; // Make sure to have your custom CSS styles if needed
-import loginImage from './logo4.png'; // Ensure the image path is correct
+import './styles.css'; // Ensure your custom CSS styles are correctly set up
+import loginImage from './logo4.png'; // Verify the image path is correct
 import { NavLink } from 'react-router-dom';
 
+// AWS SDK configuration
 AWS.config.update({
   accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
   secretAccessKey: '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',
@@ -12,7 +13,7 @@ AWS.config.update({
 });
 
 function MergedComponent() {
-    // State for ASIN
+    // State for ASIN and result
     const [asin, setAsin] = useState('');
     const [result, setResult] = useState(null);
 
@@ -38,10 +39,29 @@ function MergedComponent() {
         }
     };
 
-    // Render the result
+    // Render the result in table format
     const renderResult = () => {
-        if (result) {
-            return <div><pre>{JSON.stringify(result, null, 2)}</pre></div>;
+        if (result && result.body && Array.isArray(result.body)) {
+            return (
+                <table className="table">
+                    <thead>
+                        <tr>
+                            {Object.keys(result.body[0]).map((key, index) => (
+                                <th key={index}>{key}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {result.body.map((item, index) => (
+                            <tr key={index}>
+                                {Object.values(item).map((value, idx) => (
+                                    <td key={idx}>{value}</td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            );
         }
         return null;
     };
@@ -70,7 +90,7 @@ function MergedComponent() {
                 </div>
             </nav>
 
-            {/* ASIN Input and Lambda Invocation */}
+            {/* ASIN Input and Lambda Invocation Section */}
             <div className="content-section mt-3">
                 <h2>Enter ASIN</h2>
                 <input 
