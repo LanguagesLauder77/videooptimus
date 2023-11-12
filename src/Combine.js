@@ -7,22 +7,19 @@ import { NavLink } from 'react-router-dom';
 
 // AWS SDK configuration
 AWS.config.update({
-  accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
-  secretAccessKey: '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',
-  region: 'us-east-1'
+    accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
+    secretAccessKey: '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',
+    region: 'us-east-1'
 });
 
 function MergedComponent() {
-    // State for ASIN and result
     const [asin, setAsin] = useState('');
     const [result, setResult] = useState(null);
 
-    // Handle ASIN input changes
     const handleChangeAsin = (event) => {
         setAsin(event.target.value);
     };
 
-    // Invoke Lambda Function
     const invokeLambdaFunction = async () => {
         const lambda = new AWS.Lambda();
         const params = {
@@ -33,7 +30,6 @@ function MergedComponent() {
         try {
             const lambdaResult = await lambda.invoke(params).promise();
             const parsedResult = JSON.parse(lambdaResult.Payload);
-            // Parse the body if it's a string
             if (typeof parsedResult.body === 'string') {
                 parsedResult.body = JSON.parse(parsedResult.body);
             }
@@ -46,22 +42,39 @@ function MergedComponent() {
 
     // Render the result in table format
     const renderResult = () => {
-      if (result && result.body && Array.isArray(result.body.csv_data)) {
+      if (result && result.body) {
+          const body = JSON.parse(result.body); // Parse result body
+          const dynamodbCsvData = body.dynamodb_csv_data;
+          const rankingData = body.ranking_data;
+
           return (
-              <table className="table">
-                  <thead>
-                      <tr>
-                          <th>Attribute Name</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {result.body.csv_data.map((item, index) => (
-                          <tr key={index}>
-                              <td>{item['Attribute Name']}</td>
-                          </tr>
-                      ))}
-                  </tbody>
-              </table>
+              <>
+                {/* Render DynamoDB and CSV Data */}
+                <h3>DynamoDB and CSV Data</h3>
+                <table className="table table-striped mt-3 custom-table">
+                    <thead>
+                        <tr><th>Attribute Name</th></tr>
+                    </thead>
+                    <tbody>
+                        {dynamodbCsvData.csv_data.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item['Attribute Name']}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+                {/* Render Ranking Data */}
+                <h3>Ranking Data</h3>
+                <div className="ranking-container">
+                    {rankingData.map((item, index) => (
+                        <div key={index} className="ranking-item">
+                            <img src={item.image} alt={`Product ${index}`} />
+                            <a href={item.link} target="_blank" rel="noopener noreferrer">{item.asin}</a>
+                        </div>
+                    ))}
+                </div>
+              </>
           );
       }
       return null;
@@ -70,29 +83,28 @@ function MergedComponent() {
     return (
         <div className="container">
             <nav className="navbar navbar-expand-lg navbar-custom">
-    <a className="navbar-brand" href="#">
-        <img src={loginImage} alt="Logo" width="80" height="80" className="d-inline-block align-top" />
-    </a>
-    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ms-auto">
-            <li className="nav-item" style={{padding: "10px"}}>
-                <NavLink exact to="/HomePage" className="nav-link" activeClassName="active-link">Home</NavLink>
-            </li>
-            <li className="nav-item" style={{padding: "10px"}}>
-                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link">Operations</NavLink>
-            </li>
-            <li className="nav-item" style={{padding: "10px"}}>
-                <NavLink to="/Combine" className="nav-link" activeClassName="active-link">Creative</NavLink>
-            </li>
-        </ul>
-    </div>
-</nav>
+                <a className="navbar-brand" href="#">
+                    <img src={loginImage} alt="Logo" width="80" height="80" className="d-inline-block align-top" />
+                </a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item" style={{padding: "10px"}}>
+                            <NavLink exact to="/HomePage" className="nav-link" activeClassName="active-link">Home</NavLink>
+                        </li>
+                        <li className="nav-item" style={{padding: "10px"}}>
+                            <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link">Operations</NavLink>
+                        </li>
+                        <li className="nav-item" style={{padding: "10px"}}>
+                            <NavLink to="/Combine" className="nav-link" activeClassName="active-link">Creative</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-            {/* ASIN Input and Lambda Invocation Section */}
-            <div className="mt-3">
+            <div className="content-section mt-3">
                 <h2>Enter ASIN</h2>
                 <input 
                     type="text" 
