@@ -111,5 +111,7 @@ function MergedComponent() {
         </div>
     );
 }
+console.log('Lambda result:', lambdaResult);
+console.log('Parsed result:', JSON.parse(lambdaResult.Payload));
 
 export default MergedComponent;
