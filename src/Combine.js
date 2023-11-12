@@ -46,39 +46,53 @@ function MergedComponent() {
 
     // Render the result in table format
     const renderResult = () => {
-        if (result && result.body && Array.isArray(result.body.csv_data)) {
-            return (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            {Object.keys(result.body.csv_data[0]).map((key, index) => (
-                                <th key={index}>{key}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {result.body.csv_data.map((item, index) => (
-                            <tr key={index}>
-                                {Object.values(item).map((value, idx) => (
-                                    <td key={idx}>{value}</td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            );
-        }
-        return null;
-    };
+      if (result && result.body && Array.isArray(result.body.csv_data)) {
+          return (
+              <table className="table">
+                  <thead>
+                      <tr>
+                          <th>Attribute Name</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {result.body.csv_data.map((item, index) => (
+                          <tr key={index}>
+                              <td>{item['Attribute Name']}</td>
+                          </tr>
+                      ))}
+                  </tbody>
+              </table>
+          );
+      }
+      return null;
+  };
 
     return (
         <div className="container">
             <nav className="navbar navbar-expand-lg navbar-custom">
-                {/* Navbar content */}
-            </nav>
+    <a className="navbar-brand" href="#">
+        <img src={loginImage} alt="Logo" width="80" height="80" className="d-inline-block align-top" />
+    </a>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav ms-auto">
+            <li className="nav-item" style={{padding: "10px"}}>
+                <NavLink exact to="/HomePage" className="nav-link" activeClassName="active-link">Home</NavLink>
+            </li>
+            <li className="nav-item" style={{padding: "10px"}}>
+                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link">Operations</NavLink>
+            </li>
+            <li className="nav-item" style={{padding: "10px"}}>
+                <NavLink to="/Combine" className="nav-link" activeClassName="active-link">Creative</NavLink>
+            </li>
+        </ul>
+    </div>
+</nav>
 
             {/* ASIN Input and Lambda Invocation Section */}
-            <div className="content-section mt-3">
+            <div className="mt-3">
                 <h2>Enter ASIN</h2>
                 <input 
                     type="text" 
