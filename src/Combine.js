@@ -26,21 +26,26 @@ function MergedComponent() {
             FunctionName: 'creativeAttributes', // Replace with your Lambda function name
             Payload: JSON.stringify({ asin: asin })
         };
-
+    
         try {
             const lambdaResult = await lambda.invoke(params).promise();
-            console.log('Lambda result:', lambdaResult); // Log raw lambda result
             console.log('Payload to be parsed:', lambdaResult.Payload); // Check the Payload
-            const parsedResult = JSON.parse(lambdaResult.Payload);
-            if (typeof parsedResult.body === 'string') {
-                parsedResult.body = JSON.parse(parsedResult.body);
+    
+            // Parse the Payload from the Lambda function
+            const parsedLambdaResult = JSON.parse(lambdaResult.Payload);
+            
+            // Now parse the body within the Payload if it is a string
+            if (typeof parsedLambdaResult.body === 'string') {
+                parsedLambdaResult.body = JSON.parse(parsedLambdaResult.body);
             }
-            setResult(parsedResult);
+    
+            setResult(parsedLambdaResult);
         } catch (error) {
             console.error('Error invoking Lambda function:', error);
             setResult({ error: 'Error invoking Lambda function' });
         }
     };
+    
 
     // Render the result in table format
     const renderResult = () => {
