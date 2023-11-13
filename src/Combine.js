@@ -31,19 +31,12 @@ function MergedComponent() {
             const lambdaResult = await lambda.invoke(params).promise();
             console.log('Lambda result:', lambdaResult); // Log the raw lambda result
     
-            let parsedLambdaResult;
-            if (typeof lambdaResult.Payload === 'string') {
-                parsedLambdaResult = JSON.parse(lambdaResult.Payload);
-            } else {
-                // Handle the case where Payload might not be a string
-                parsedLambdaResult = lambdaResult.Payload;
-            }
+            // First parse the Payload from the Lambda function
+            const parsedLambdaResult = JSON.parse(lambdaResult.Payload);
     
+            // Now parse the 'body' within the Payload
             if (typeof parsedLambdaResult.body === 'string') {
                 parsedLambdaResult.body = JSON.parse(parsedLambdaResult.body);
-            } else {
-                // Handle the case where body is not a string
-                parsedLambdaResult.body = parsedLambdaResult.body;
             }
     
             setResult(parsedLambdaResult);
@@ -52,6 +45,7 @@ function MergedComponent() {
             setResult({ error: 'Error invoking Lambda function' });
         }
     };
+    
     
     
 
