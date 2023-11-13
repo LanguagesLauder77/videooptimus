@@ -51,45 +51,58 @@ function MergedComponent() {
 
     // Render the result in table format
     const renderResult = () => {
-      if (result && result.body) {
-        const bodyData = typeof result.body === 'string' ? JSON.parse(result.body) : result.body;
-
-        // Assuming the body contains 'dynamodb_csv_data' and 'ranking_data'
-        const dynamodbCsvData = bodyData.dynamodb_csv_data;
-        const rankingData = bodyData.ranking_data;
-
+        if (result && result.body) {
+          const bodyData = typeof result.body === 'string' ? JSON.parse(result.body) : result.body;
+          const dynamodbCsvData = bodyData.dynamodb_csv_data;
+          const rankingData = bodyData.ranking_data;
+      
           return (
-              <>
-                {/* Render DynamoDB and CSV Data */}
-                <h3>DynamoDB and CSV Data</h3>
-                <table className="table table-striped mt-3 custom-table">
-                    <thead>
-                        <tr><th>Attribute Name</th></tr>
-                    </thead>
-                    <tbody>
-                        {dynamodbCsvData.csv_data.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item['Attribute Name']}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                {/* Render Ranking Data */}
-                <h3>Ranking Data</h3>
-                <div className="ranking-container">
-                    {rankingData.map((item, index) => (
-                        <div key={index} className="ranking-item">
-                            <img src={item.image} alt={`Product ${index}`} />
-                            <a href={item.link} target="_blank" rel="noopener noreferrer">{item.asin}</a>
-                        </div>
-                    ))}
-                </div>
-              </>
+            <>
+              {/* Render DynamoDB and CSV Data */}
+              <h3>DynamoDB and CSV Data</h3>
+              <table className="table table-striped mt-3 custom-table">
+                <thead>
+                  <tr><th>Attribute Name</th></tr>
+                </thead>
+                <tbody>
+                  {dynamodbCsvData.csv_data.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item['Attribute Name']}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+      
+              {/* Render Ranking Data */}
+              <h3>Ranking Data</h3>
+              <table className="table table-striped mt-3 custom-table">
+                <thead>
+                  <tr>
+                    <th>ASIN</th>
+                    <th>Link</th>
+                    <th>Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rankingData.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.asin}</td>
+                      <td>
+                        <a href={item.link} target="_blank" rel="noopener noreferrer">Product Link</a>
+                      </td>
+                      <td>
+                        <img src={item.image} alt={`Product ${index}`} style={{ width: "100px", height: "auto" }} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
           );
-      }
-      return null;
-  };
+        }
+        return null;
+      };
+      
 
     return (
         <div className="container">
