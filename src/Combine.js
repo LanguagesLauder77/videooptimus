@@ -31,14 +31,19 @@ function MergedComponent() {
             const lambdaResult = await lambda.invoke(params).promise();
             console.log('Lambda result:', lambdaResult); // Log the raw lambda result
     
-            // Check if Payload is a string and parse it, otherwise use it directly
-            const parsedLambdaResult = typeof lambdaResult.Payload === 'string' ?
-                                       JSON.parse(lambdaResult.Payload) : 
-                                       lambdaResult.Payload;
+            let parsedLambdaResult;
+            if (typeof lambdaResult.Payload === 'string') {
+                parsedLambdaResult = JSON.parse(lambdaResult.Payload);
+            } else {
+                // Handle the case where Payload might not be a string
+                parsedLambdaResult = lambdaResult.Payload;
+            }
     
-            // If the body is a string, parse it as well
             if (typeof parsedLambdaResult.body === 'string') {
                 parsedLambdaResult.body = JSON.parse(parsedLambdaResult.body);
+            } else {
+                // Handle the case where body is not a string
+                parsedLambdaResult.body = parsedLambdaResult.body;
             }
     
             setResult(parsedLambdaResult);
