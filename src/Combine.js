@@ -52,9 +52,11 @@ function MergedComponent() {
     // Render the result in table format
     const renderResult = () => {
       if (result && result.body) {
-          const body = JSON.parse(result.body); // Parse result body
-          const dynamodbCsvData = body.dynamodb_csv_data;
-          const rankingData = body.ranking_data;
+        const bodyData = typeof result.body === 'string' ? JSON.parse(result.body) : result.body;
+
+        // Assuming the body contains 'dynamodb_csv_data' and 'ranking_data'
+        const dynamodbCsvData = bodyData.dynamodb_csv_data;
+        const rankingData = bodyData.ranking_data;
 
           return (
               <>
