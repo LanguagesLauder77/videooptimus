@@ -40,19 +40,19 @@ function LoginPage() {
             <h3 className="mb-4 login-text">Login</h3>
             <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
-    type="text"
-    placeholder="Enter username"
-    value={username}
-    onChange={(e) => setUsername(e.target.value)}
-    className="form-control"
-/>
-<Form.Control
-    type="password"
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    className="form-control"
-/>
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="form-control"
+           />
+            <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+            />
             </Form.Group>
             {error && <p style={{ color: 'red' }}>Invalid username or password!</p>}
             <Button className="custom-button-color"  type="submit">
