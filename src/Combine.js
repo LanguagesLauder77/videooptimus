@@ -59,7 +59,7 @@ function MergedComponent() {
           return (
             <>
               {/* Render DynamoDB and CSV Data */}
-              <h3>DynamoDB and CSV Data</h3>
+             
               <table className="table table-striped mt-3 custom-table">
                 <thead>
                   <tr><th>Attribute Name</th></tr>
@@ -129,7 +129,7 @@ function MergedComponent() {
             </nav>
 
             <div className="content-section mt-3">
-                <h2>Enter ASIN</h2>
+                <h2>Scan the ASIN</h2>
                 <input 
                     type="text" 
                     value={asin} 
