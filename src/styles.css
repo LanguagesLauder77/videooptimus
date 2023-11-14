@@ -167,7 +167,7 @@
   padding: 10px; /* or any value that suits your design */
 }
 .my-3 {
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .login-text {
@@ -179,8 +179,8 @@
   opacity: 0.8; /* Reduced opacity for input fields */
 }
 .form-group {
-  padding-top: 20px;
-  margin-bottom: 20px; /* Adjust the bottom margin as needed */
+  padding-top: 10px;
+  /* Adjust the bottom margin as needed */
 }
 
 .form-control::placeholder {
