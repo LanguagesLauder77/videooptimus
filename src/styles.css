@@ -122,6 +122,26 @@
 .custom-table td {
   border-color: #704f37; /* Adjust if you want the borders to be a different color */
 }
+
+.custom-table {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #333333; /* Darker text color */
+}
+
+.custom-table thead {
+  background-color: #007bff; /* Blue background for header */
+  color: #ffffff; /* White text color */
+}
+
+.custom-table th, .custom-table td {
+  padding: 8px; /* Adjust padding */
+  text-align: left; /* Align text to the left */
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #e9ecef; /* Zebra striping for rows */
+}
+
 .center-screen {
   display: flex;
   justify-content: center;
