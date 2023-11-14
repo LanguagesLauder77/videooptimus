@@ -176,8 +176,10 @@
 }
 
 .form-control {
-  opacity: 0.8;
-  padding-top: 20px; /* Reduced opacity for input fields */
+  opacity: 0.8; /* Reduced opacity for input fields */
+}
+.form-group {
+  margin-bottom: 20px; /* Adjust the bottom margin as needed */
 }
 
 .form-control::placeholder {
