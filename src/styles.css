@@ -179,6 +179,7 @@
   opacity: 0.8; /* Reduced opacity for input fields */
 }
 .form-group {
+  padding-top: 20px;
   margin-bottom: 20px; /* Adjust the bottom margin as needed */
 }
 
