@@ -149,3 +149,20 @@
 .my-3 {
   padding-top: 20px;
 }
+
+.login-text {
+  color: #704f37; /* Example color: blue */
+  font-family: Arial, sans-serif; /* Example font */
+}
+
+.form-control {
+  opacity: 0.8; /* Reduced opacity for input fields */
+}
+
+.form-control::placeholder {
+  color: #6c757d; /* Placeholder text color */
+}
+
+.error-message {
+  color: red;
+}
