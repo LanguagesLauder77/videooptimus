@@ -230,7 +230,7 @@
   text-decoration: underline;
   text-decoration-color: #F5F5F5; /* Smoke white color */
   text-underline-offset: 2px;
-  border-bottom: 3px solid #F5F5F5;
+  border-bottom: 3px solid #ff1616;
 }
 .navbar-light .navbar-nav .active::after {
   position: absolute;
