@@ -118,11 +118,14 @@ function MergedComponent() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
+                    <NavLink 
+                        to="/HomePage" 
+                         className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}
+                            >
+                            Home
+                            </NavLink>
                         <li className="nav-item" style={{padding: "10px"}}>
-                            <NavLink to="/HomePage" className="nav-link" activeClassName ="active-link">Home</NavLink>
-                        </li>
-                        <li className="nav-item" style={{padding: "10px"}}>
-                            <NavLink to="/FileUpload" className="nav-link" activeClassName ="active-link">Operations</NavLink>
+                            <NavLink to="/FileUpload"  title="Go to Home Page" className="nav-link" activeClassName ="active-link">Operations</NavLink>
                         </li>
                         <li className="nav-item" style={{padding: "10px"}}>
                             <NavLink to="/Combine" className="nav-link" activeClassName ="active-link">Creative</NavLink>
