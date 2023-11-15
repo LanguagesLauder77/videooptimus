@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import AWS from 'aws-sdk';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css';
-import loginImage from './logo4.png';
+import './styles.css'; // Ensure your custom CSS styles are correctly set up
+import loginImage from './logo4.png'; // Verify the image path is correct
 import { NavLink } from 'react-router-dom';
-import loadingGif from './loading.gif'; // Make sure this path is correct
 
+// AWS SDK configuration
 AWS.config.update({
     accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
     secretAccessKey: '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',
@@ -15,24 +15,26 @@ AWS.config.update({
 function MergedComponent() {
     const [asin, setAsin] = useState('');
     const [result, setResult] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleChangeAsin = (event) => {
         setAsin(event.target.value);
     };
 
     const invokeLambdaFunction = async () => {
-        setIsLoading(true);
         const lambda = new AWS.Lambda();
         const params = {
-            FunctionName: 'creativeAttributes',
+            FunctionName: 'creativeAttributes', // Replace with your Lambda function name
             Payload: JSON.stringify({ asin: asin })
         };
     
         try {
             const lambdaResult = await lambda.invoke(params).promise();
+            console.log('Lambda result:', lambdaResult); // Log the raw lambda result
+    
+            // First parse the Payload from the Lambda function
             const parsedLambdaResult = JSON.parse(lambdaResult.Payload);
     
+            // Now parse the 'body' within the Payload
             if (typeof parsedLambdaResult.body === 'string') {
                 parsedLambdaResult.body = JSON.parse(parsedLambdaResult.body);
             }
@@ -41,69 +43,53 @@ function MergedComponent() {
         } catch (error) {
             console.error('Error invoking Lambda function:', error);
             setResult({ error: 'Error invoking Lambda function' });
-        } finally {
-            setIsLoading(false);
         }
     };
+    
+    
+    
 
+    // Render the result in table format
     const renderResult = () => {
-        if (result && result.body) {
-            const bodyData = typeof result.body === 'string' ? JSON.parse(result.body) : result.body;
-            
-            // Check if dynamodbCsvData is defined
-            const dynamodbCsvData = bodyData.dynamodb_csv_data;
-            if (!dynamodbCsvData) {
-                // Handle the case where dynamodbCsvData is undefined
-                return <div>No data available</div>;
-            }
-    
-            const rankingData = bodyData.ranking_data;
-    
-            return (
-                <>
-                    <h3 className='custom-h2'>Suggested key features to capture</h3>
-                    <table className="table table-striped mt-3 custom-table">
-                        <thead>
-                            <tr><th>Product features</th></tr>
-                        </thead>
-                        <tbody>
-                            {dynamodbCsvData.csv_data.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item['Attribute Name']}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-          
-                    <h3 className='custom-h2'>Product Category Best Sellers</h3>
-                    <table className="table table-striped mt-3 custom-table">
-                        <thead>
-                            <tr>
-                                <th>ASIN</th>
-                                <th>Link</th>
-                                <th>Image</th>
+      if (result && result.body) {
+          const bodyData = typeof result.body === 'string' ? JSON.parse(result.body) : result.body;
+
+        // Assuming the body contains 'dynamodb_csv_data' and 'ranking_data'
+        const dynamodbCsvData = bodyData.dynamodb_csv_data;
+        const rankingData = bodyData.ranking_data;
+
+          return (
+              <>
+                {/* Render DynamoDB and CSV Data */}
+                <h3>DynamoDB and CSV Data</h3>
+                <table className="table table-striped mt-3 custom-table">
+                    <thead>
+                        <tr><th>Attribute Name</th></tr>
+                    </thead>
+                    <tbody>
+                        {dynamodbCsvData.csv_data.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item['Attribute Name']}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {rankingData.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.asin}</td>
-                                    <td>
-                                        <a href={item.link} target="_blank" rel="noopener noreferrer">Product Link</a>
-                                    </td>
-                                    <td>
-                                        <img src={item.image} alt={`Product ${index}`} style={{ width: "100px", height: "auto" }} />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </>
-            );
-        }
-        return null;
-    };
-    
+                        ))}
+                    </tbody>
+                </table>
+
+                {/* Render Ranking Data */}
+                <h3>Ranking Data</h3>
+                <div className="ranking-container">
+                    {rankingData.map((item, index) => (
+                        <div key={index} className="ranking-item">
+                            <img src={item.image} alt={`Product ${index}`} />
+                            <a href={item.link} target="_blank" rel="noopener noreferrer">{item.asin}</a>
+                        </div>
+                    ))}
+                </div>
+              </>
+          );
+      }
+      return null;
+  };
 
     return (
         <div className="container">
@@ -130,22 +116,21 @@ function MergedComponent() {
             </nav>
 
             <div className="content-section mt-3">
-                <h2 className='custom-h2'>Submit ASIN for Details</h2>
+                <h2>Enter ASIN</h2>
                 <input 
                     type="text" 
                     value={asin} 
                     onChange={handleChangeAsin} 
                     className="form-control mb-3" 
-                    placeholder="Enter ASIN Here" 
+                    placeholder="Enter ASIN" 
                 />
                 <button 
                     onClick={invokeLambdaFunction} 
-                    className="btn btn-primary custom-button-center"
+                    className="custom-button-color"
                 >
-                    Get Video Details
+                    Submit
                 </button>
-                {isLoading && <img src={loadingGif} alt="Loading" className="loading-gif" />}
-                {!isLoading && renderResult()}
+                {renderResult()}
             </div>
         </div>
     );
