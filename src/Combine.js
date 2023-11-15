@@ -118,14 +118,14 @@ function MergedComponent() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item" style={{padding: "10px"}}>
+                        <li className="nav-item " style={{padding: "10px"}}>
                             <NavLink exact to="/HomePage" className="nav-link" activeClassName ="active-link">Home</NavLink>
                         </li>
                         <li className="nav-item" style={{padding: "10px"}}>
-                            <NavLink to="/FileUpload" className="nav-link" activeClassName ="active-link">Operations</NavLink>
+                            <NavLink activeStyle={{ color:'#5754a8' }} to="/FileUpload" className="nav-link" activeClassName ="active-link">Operations</NavLink>
                         </li>
                         <li className="nav-item" style={{padding: "10px"}}>
-                            <NavLink to="/Combine" className="nav-link" activeClassName ="active-link">Creative</NavLink>
+                            <NavLink  activeStyle={{ color:'#5754a8' }} to="/Combine" className="nav-link" activeClassName ="active-link">Creative</NavLink>
                         </li>
                     </ul>
                 </div>

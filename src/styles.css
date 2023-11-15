@@ -230,3 +230,11 @@
   text-decoration-color: #F5F5F5; /* Smoke white color */
   text-underline-offset: 2px;
 }
+.navbar-light .navbar-nav .active::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  content: " ";
+  border-bottom: 5px solid #5BC0EB;
+}
