@@ -89,7 +89,7 @@
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-nav .nav-link {
   color: #ffffff;
-  border-bottom: 3px solid red;
+  
 }
 
 
@@ -230,6 +230,7 @@
   text-decoration: underline;
   text-decoration-color: #F5F5F5; /* Smoke white color */
   text-underline-offset: 2px;
+  border-bottom: 3px solid #F5F5F5;
 }
 .navbar-light .navbar-nav .active::after {
   position: absolute;
