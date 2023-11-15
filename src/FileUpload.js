@@ -73,7 +73,7 @@ function FileUpload() {
 
   const fetchCsvData = async () => {
     try {
-      const response = await axios.get('https://videolambdaout.s3.amazonaws.com/output.csv');
+      const response = await axios.get('https://videolambdaout.s3.amazonaws.com/output_77.csv');
       const data = response.data;
       const parsedCsvData = data.split('\n').map(row => row.split(','));
       setCsvData(parsedCsvData);
@@ -154,7 +154,7 @@ function FileUpload() {
 
        {/* Alert Box */}
        
-      <div className="my-3">
+       <div className="content-section mt-3">
       
         <input type="file" onChange={handleFileChange} className="form-control" accept=".csv,text/csv"  />
       </div>
@@ -166,7 +166,7 @@ function FileUpload() {
 </p>  
       <div className="text-center">
         <button onClick={handleUpload} disabled={!file || uploading}  className="custom-button-color mb-3">
-          {uploading ? 'UPLOADING...' : 'UPLOAD'}
+          {uploading ? 'Uploading...' : 'Upload'}
         </button>
 
         {uploading && (

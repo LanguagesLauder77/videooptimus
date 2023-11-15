@@ -122,13 +122,13 @@ function MergedComponent() {
             </nav>
 
             <div className="content-section mt-3">
-                <h2 className='custom-h2'>Scan the ASIN</h2>
+                <h2 className='custom-h2'>Submit ASIN for Details</h2>
                 <input 
                     type="text" 
                     value={asin} 
                     onChange={handleChangeAsin} 
                     className="form-control mb-3" 
-                    placeholder="Scan ASIN" 
+                    placeholder="Enter ASIN Here" 
                 />
                 <button 
                     onClick={invokeLambdaFunction} 
