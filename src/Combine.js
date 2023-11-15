@@ -54,7 +54,7 @@ function MergedComponent() {
       
             return (
                 <>
-                    <h3>Suggested key features to capture</h3>
+                    <h3 className='custom-h2'>Suggested key features to capture</h3>
                     <table className="table table-striped mt-3 custom-table">
                         <thead>
                             <tr><th>Product features</th></tr>
@@ -68,7 +68,7 @@ function MergedComponent() {
                         </tbody>
                     </table>
       
-                    <h3>Product Category Best Sellers</h3>
+                    <h3 className='custom-h2'>Product Category Best Sellers</h3>
                     <table className="table table-striped mt-3 custom-table">
                         <thead>
                             <tr>
@@ -122,7 +122,7 @@ function MergedComponent() {
             </nav>
 
             <div className="content-section mt-3">
-                <h2>Scan the ASIN</h2>
+                <h2 className='custom-h2'>Scan the ASIN</h2>
                 <input 
                     type="text" 
                     value={asin} 

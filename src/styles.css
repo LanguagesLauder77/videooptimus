@@ -204,4 +204,9 @@
   width: 100%;
   max-width: 100px; /* Adjust the width as needed */
   margin: 0 auto; /* Center the button */
+  background-color: #704f37 !important;
+  padding: 10px 16px; 
+  /* If you want to change the color of text on the button, use the color property */
+  color: #ffffff !important; 
+  border-radius: 7px 
 }
