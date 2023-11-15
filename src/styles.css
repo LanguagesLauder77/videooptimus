@@ -120,7 +120,9 @@
 
 .custom-table th,
 .custom-table td {
-  border-color: #704f37; /* Adjust if you want the borders to be a different color */
+  border-color: #704f37; 
+  background-color: #704f37; /* Set the background color */
+  color: white; /* Set the text color to white for better readability *//* Adjust if you want the borders to be a different color */
 }
 
 .custom-table {
@@ -214,4 +216,8 @@
   display: block;
   margin: 0 auto; /* Center the GIF */
   width: 50px; /* Adjust the size as needed */
+}
+.custom-table thead th {
+  background-color: brown; /* Set the background color */
+  color: white; /* Set the text color to white for better readability */
 }
