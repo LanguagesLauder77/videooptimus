@@ -129,7 +129,7 @@ function MergedComponent() {
             </nav>
 
             <div className="content-section mt-3">
-                <h2>Scan the ASIN</h2>
+                <h2 className="custom-h2">Scan the ASIN</h2>
                 <input 
                     type="text" 
                     value={asin} 
@@ -139,7 +139,7 @@ function MergedComponent() {
                 />
                 <button 
                     onClick={invokeLambdaFunction} 
-                    className="custom-button-color"
+                    className="custom-button-color custom-button-center"
                 >
                     Submit
                 </button>

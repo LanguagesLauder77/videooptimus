@@ -35,7 +35,7 @@ function HomePage() {
       {/* ... existing navbar ... */}
       <div className="center-screen">
         <div>
-          <h2>Welcome to the Application Portal</h2>
+          <h2 className="custom-h2-color">Welcome to the Application Portal</h2>
         </div>
       </div>
     </div>
