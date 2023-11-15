@@ -202,6 +202,6 @@
 .custom-button-center {
   display: block;
   width: 100%;
-  max-width: 200px; /* Adjust the width as needed */
+  max-width: 100px; /* Adjust the width as needed */
   margin: 0 auto; /* Center the button */
 }
