@@ -122,10 +122,15 @@ function MergedComponent() {
                             <NavLink exact to="/HomePage" className="nav-link" activeClassName ="active-link">Home</NavLink>
                         </li>
                         <li className="nav-item" style={{padding: "10px"}}>
-                            <NavLink activeStyle={{ color:'#5754a8' }} to="/FileUpload" className="nav-link" activeClassName ="active-link">Operations</NavLink>
+                            <NavLink  to="/FileUpload" className="nav-link" activeClassName ="active-link" >Operations</NavLink>
                         </li>
                         <li className="nav-item" style={{padding: "10px"}}>
-                            <NavLink  activeStyle={{ color:'#5754a8' }} to="/Combine" className="nav-link" activeClassName ="active-link">Creative</NavLink>
+                            <NavLink   to="/Combine" className="nav-link" activeClassName ="active-link" style={{ 
+        textDecoration: 'underline', 
+        textDecorationColor: '#ffffff', // Replace with your desired color
+        paddingBottom: '2px', // Adjust the padding as needed
+        textUnderlineOffset: '3px' // Adjust the offset of the underline from the text
+    }}>Creative</NavLink>
                         </li>
                     </ul>
                 </div>

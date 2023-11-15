@@ -7,6 +7,7 @@ import creativeImage from './idea.png';
 import genAIImage from './artificial.png';
 import loginImage from './logo4.png'; 
 import { NavLink } from 'react-router-dom';
+
 function HomePage() {
     return (
       <div className="container">
@@ -20,10 +21,23 @@ function HomePage() {
     <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ms-auto">
             <li className="nav-item" style={{padding: "10px"}}>
-                <NavLink exact to="/HomePage" className="nav-link" activeClassName="active-link">Home</NavLink>
+            <NavLink 
+    exact 
+    to="/HomePage" 
+    className="nav-link" 
+    activeClassName="active-link" 
+    style={{ 
+        textDecoration: 'underline', 
+        textDecorationColor: '#ffffff', // Replace with your desired color
+        paddingBottom: '2px', // Adjust the padding as needed
+        textUnderlineOffset: '3px' // Adjust the offset of the underline from the text
+    }}
+>
+    Home
+</NavLink>
             </li>
             <li className="nav-item" style={{padding: "10px"}}>
-                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link">Operations</NavLink>
+                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link" >Operations</NavLink>
             </li>
             <li className="nav-item" style={{padding: "10px"}}>
                 <NavLink to="/Combine" className="nav-link" activeClassName="active-link">Creative</NavLink>
