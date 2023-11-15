@@ -31,6 +31,8 @@ function MergedComponent() {
     
         try {
             const lambdaResult = await lambda.invoke(params).promise();
+            console.log('Lambda result:', lambdaResult); // Log the raw lambda result
+            console.log('Payload to be parsed:', lambdaResult.Payload); // Check the Payload
             const parsedLambdaResult = JSON.parse(lambdaResult.Payload);
     
             if (typeof parsedLambdaResult.body === 'string') {
