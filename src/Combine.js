@@ -59,10 +59,10 @@ function MergedComponent() {
           return (
             <>
               {/* Render DynamoDB and CSV Data */}
-             
+              <h3>Suggested key features to capture</h3>
               <table className="table table-striped mt-3 custom-table">
                 <thead>
-                  <tr><th>Attribute Name</th></tr>
+                  <tr><th>Product features</th></tr>
                 </thead>
                 <tbody>
                   {dynamodbCsvData.csv_data.map((item, index) => (
@@ -74,7 +74,7 @@ function MergedComponent() {
               </table>
       
               {/* Render Ranking Data */}
-              <h3>Ranking Data</h3>
+              <h3>Product Category Best Sellers</h3>
               <table className="table table-striped mt-3 custom-table">
                 <thead>
                   <tr>
