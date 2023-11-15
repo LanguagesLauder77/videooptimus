@@ -90,9 +90,7 @@
 .navbar-custom .navbar-nav .nav-link {
   color: #ffffff;
 }
-.active-link {
-  border-bottom: 2px solid #ffffff; /* change color as needed */
-}
+
 
 /* change color of toggler icon */
 .navbar-custom .navbar-toggler {
@@ -223,6 +221,6 @@
 }
 .active-link {
   text-decoration: underline;
-  text-decoration-color: smoke; /* or use a specific color like #f5f5f5 for smoke white */
+  text-decoration-color: #F5F5F5; /* or use a specific color like #f5f5f5 for smoke white */
   text-underline-offset: 2px; /* Adjusts the position of the underline */
 }
