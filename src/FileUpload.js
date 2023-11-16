@@ -165,9 +165,9 @@ function FileUpload() {
       </div>
       
       <p className="note-text">
-  Note: Please use the provided
+  Note: Please use this
   <a href="https://f.io/rbSoYEMO" target="_blank" rel="noopener noreferrer">  template </a> 
-  without altering the format, and note that during the pilot, the maximum number of ASINs to be processed is limited to 50.
+  without altering the format, and currently, the maximum number of ASINs to be processed is limited to 50.
 </p>  
       <div className="text-center">
         <button onClick={handleUpload} disabled={!file || uploading}  className="custom-button-color mb-3">
