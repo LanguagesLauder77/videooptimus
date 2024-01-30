@@ -88,8 +88,12 @@
               };
 
               const fetchCsvData = async () => {
+                if (!uniqueCsvFilename) {
+                  console.error("CSV filename is empty");
+                  return;
+                }
                 try {
-                  const url = `https://videolambdaout.s3.amazonaws.com/${fileName}`;
+                  const url = `https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}`;
                   console.log("Requesting URL:", url);
                   const response = await axios.get(url, { responseType: 'text' });
                   console.log(response);
