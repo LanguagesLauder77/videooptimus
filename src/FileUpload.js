@@ -43,9 +43,24 @@ function FileUpload() {
       // Invoke Lambda function
       const lambda = new AWS.Lambda();
       const params = {
-        FunctionName: 'videoOptimus',
-        Payload: JSON.stringify({ key: fileName}), // add selectedOption here
-      };
+        FunctionName: 'videoOptimus', // Replace with your lambda function name
+        Payload: JSON.stringify({
+            Records: [
+                {
+                    s3: {
+                        bucket: {
+                            name: 'video-optimus-demo' // Replace with your bucket name
+                        },
+                        object: {
+                            key: fileName
+                        }
+                    }
+                }
+            ]
+        }),
+    };
+
+  
       lambda.invoke(params, (error, result) => {
         if (error) {
           console.error('Lambda invocation error', error);
@@ -58,7 +73,7 @@ function FileUpload() {
           // Adding a delay of 5 seconds before checking the CSV file
           setTimeout(() => {
             fetchCsvData();
-          }, 20000);
+          }, 29000);
         }
       });
 
