@@ -89,7 +89,8 @@ function FileUpload() {
 
   const fetchCsvData = async () => {
     try {
-      const response = await axios.get('https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}');
+      const url = `https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}`;
+      const response = await axios.get(url);
       const data = response.data;
       const parsedCsvData = data.split('\n').map(row => row.split(','));
       setCsvData(parsedCsvData);
