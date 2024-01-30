@@ -19,9 +19,9 @@ function FileUpload() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [lambdaOutput, setLambdaOutput] = useState(null);
+  const [uniqueCsvFilename, setUniqueCsvFilename] = useState('');
   const [csvData, setCsvData] = useState([]);
  
-
    
   const handleUpload = async () => {
     try {
@@ -53,6 +53,7 @@ function FileUpload() {
           const lambdaOutput = JSON.parse(result.Payload);
           console.log('Lambda output:', lambdaOutput);
           setLambdaOutput(lambdaOutput);
+          setUniqueCsvFilename(lambdaOutput.uniqueCsvFilename);
 
           // Adding a delay of 5 seconds before checking the CSV file
           setTimeout(() => {
@@ -73,7 +74,7 @@ function FileUpload() {
 
   const fetchCsvData = async () => {
     try {
-      const response = await axios.get('https://videolambdaout.s3.amazonaws.com/output.csv');
+      const response = await axios.get('https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}');
       const data = response.data;
       const parsedCsvData = data.split('\n').map(row => row.split(','));
       setCsvData(parsedCsvData);
@@ -159,7 +160,7 @@ function FileUpload() {
         <input type="file" onChange={handleFileChange} className="form-control" accept=".csv,text/csv"  />
       </div>
       
-      <p className="note-text">
+      <p className="note-text">0
   Note: Please use the provided
   <a href="https://f.io/rbSoYEMO" target="_blank" rel="noopener noreferrer">  template </a> 
   without altering the format, and note that during the pilot, the maximum number of ASINs to be processed is limited to 50.
