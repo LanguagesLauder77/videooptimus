@@ -85,14 +85,19 @@
   
 }
 
+.active-link {
+  text-decoration: underline;
+  /* Additional styling if needed, like color change, font-weight, etc. */
+}
+
+
 /* change navbar brand and link colors */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-nav .nav-link {
   color: #ffffff;
+  
 }
-.active-link {
-  border-bottom: 2px solid #ffffff; /* change color as needed */
-}
+
 
 /* change color of toggler icon */
 .navbar-custom .navbar-toggler {
@@ -110,6 +115,9 @@
   font-weight: bold;
   transition: color 0.3s ease-in-out; /* Adds a smooth color transition */
 }
+.navbar-custom .navbar-nav .nav-link:active {
+   text-decoration: none;
+}
 .navbar-text {
   color: rgb(255, 255, 255); /* or any other color */
   /* other styles */
@@ -120,8 +128,30 @@
 
 .custom-table th,
 .custom-table td {
-  border-color: #704f37; /* Adjust if you want the borders to be a different color */
+  border-color: #704f37; 
+
+   /* Set the text color to white for better readability *//* Adjust if you want the borders to be a different color */
 }
+
+.custom-table {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #333333; /* Darker text color */
+}
+
+.custom-table thead {
+  background-color: #007bff; /* Blue background for header */
+  color: #ffffff; /* White text color */
+}
+
+.custom-table th, .custom-table td {
+  padding: 8px; /* Adjust padding */
+  text-align: left; /* Align text to the left */
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #e9ecef; /* Zebra striping for rows */
+}
+
 .center-screen {
   display: flex;
   justify-content: center;
@@ -147,5 +177,57 @@
   padding: 10px; /* or any value that suits your design */
 }
 .my-3 {
-  padding-top: 20px;
+  padding-top: 10px;
+  opacity: 0.8;
 }
+
+.login-text {
+  color: #704f37; /* Example color: blue */
+  font-family: Arial, sans-serif; /* Example font */
+}
+
+.form-control {
+  opacity: 0.8; /* Reduced opacity for input fields */
+}
+.form-group {
+  padding-top: 10px;
+  /* Adjust the bottom margin as needed */
+}
+
+.form-control::placeholder {
+  color: #6c757d; /* Placeholder text color */
+}
+
+.error-message {
+  color: rgb(234, 1, 1);
+}
+
+.custom-h2-color {
+   color: #704f37; /* Example color: blue */
+}
+.custom-h2 {
+  font-size: 18px;
+  color: #704f37; /* Reduced font size for h2 */
+}
+
+.custom-button-center {
+  display: block;
+  width: 100%;
+  max-width: 200px; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the button */
+  background-color: #704f37 !important;
+  padding: 10px 16px; 
+  /* If you want to change the color of text on the button, use the color property */
+  color: #ffffff !important; 
+  border-radius: 7px 
+}
+.loading-gif {
+  display: block;
+  margin: 0 auto; /* Center the GIF */
+  width: 50px; /* Adjust the size as needed */
+}
+.custom-table thead th {
+  background-color: #704f37; /* Set the background color */
+  color: white; /* Set the text color to white for better readability */
+}
+

@@ -37,7 +37,7 @@ function LoginPage() {
         <Col>
           <Form onSubmit={handleSubmit} className="text-center">
           <img src={loginImage} alt="login" className="mb-4" style={{ width: '100px', height: '100px' }} /> {/* Adjust size as needed */}
-            <h3 className="mb-4">Login</h3>
+            <h3 className="mb-4 login-text">Login</h3>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
                 type="text"

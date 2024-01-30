@@ -133,7 +133,7 @@ function FileUpload() {
 
 <nav className="navbar navbar-expand-lg navbar-custom">
     <a className="navbar-brand" href="#">
-        <img src={loginImage} alt="Logo" width="70" height="70" className="d-inline-block align-top" />
+        <img src={loginImage} alt="Logo" width="80" height="80" className="d-inline-block align-top" />
     </a>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -144,7 +144,12 @@ function FileUpload() {
                 <NavLink exact to="/HomePage" className="nav-link" activeClassName="active-link">Home</NavLink>
             </li>
             <li className="nav-item" style={{padding: "10px"}}>
-                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link">Operations</NavLink>
+                <NavLink to="/FileUpload" className="nav-link" activeClassName="active-link" style={{ 
+        textDecoration: 'underline', 
+        textDecorationColor: '#ffffff', // Replace with your desired color
+        paddingBottom: '2px', // Adjust the padding as needed
+        textUnderlineOffset: '3px' // Adjust the offset of the underline from the text
+    }}>Operations</NavLink>
             </li>
             <li className="nav-item" style={{padding: "10px"}}>
                 <NavLink to="/Combine" className="nav-link" activeClassName="active-link">Creative</NavLink>
@@ -155,19 +160,19 @@ function FileUpload() {
 
        {/* Alert Box */}
        
-      <div className="my-3">
+       <div className="content-section mt-3">
       
         <input type="file" onChange={handleFileChange} className="form-control" accept=".csv,text/csv"  />
       </div>
       
-      <p className="note-text">0
+      <p className="note-text">
   Note: Please use the provided
   <a href="https://f.io/rbSoYEMO" target="_blank" rel="noopener noreferrer">  template </a> 
-  without altering the format, and note that during the pilot, the maximum number of ASINs to be processed is limited to 50.
+  without altering the format, and currently, the maximum number of ASINs to be processed is limited to 50.
 </p>  
       <div className="text-center">
         <button onClick={handleUpload} disabled={!file || uploading}  className="custom-button-color mb-3">
-          {uploading ? 'UPLOADING...' : 'UPLOAD'}
+          {uploading ? 'Uploading...' : 'Upload'}
         </button>
 
         {uploading && (
