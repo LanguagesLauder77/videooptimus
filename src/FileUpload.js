@@ -91,7 +91,9 @@
                 try {
                   const url = `https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}`;
                   const response = await axios.get(url);
+                  console.log(response);
                   const data = response.data;
+                  console.log(data);
                   const parsedCsvData = data.split('\n').map(row => row.split(','));
                   console.log(parsedCsvData);
                   setCsvData(parsedCsvData);
