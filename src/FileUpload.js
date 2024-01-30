@@ -90,7 +90,7 @@
               const fetchCsvData = async () => {
                 try {
                   const url = `https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}`;
-                  const response = await axios.get(url);
+                  const response = await axios.get(url, { responseType: 'text' });
                   console.log(response);
                   const data = response.data;
                   console.log(data);
