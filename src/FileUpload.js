@@ -73,7 +73,7 @@
 
                       // Adding a delay of 5 seconds before checking the CSV file
                       setTimeout(() => {
-                        fetchCsvData();
+                        fetchCsvData(fileName);
                       }, 29000);
                     }
                   });
@@ -89,7 +89,10 @@
               };
 
               const fetchCsvData = async (fileName) => {
-                console.log(fileName);
+                if (!fileName) {
+                  console.error("CSV filename is empty");
+                  return;
+                }
                 try {
                   const url = `https://videolambdaout.s3.amazonaws.com/${fileName}`;
                   console.log("Requesting URL:", url);
