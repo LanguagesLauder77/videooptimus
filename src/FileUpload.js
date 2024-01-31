@@ -28,7 +28,7 @@
                   setUploading(true);
                   const fileExtension = file.name.split('.').pop();
                   const fileName = `${uuidv4()}.${fileExtension}`;
-
+                  
                   const uploadData = await s3.upload({
                     Bucket: 'video-optimus-demo',
                     Key: fileName,
@@ -61,22 +61,27 @@
                 };
 
               
-                  lambda.invoke(params, (error, result) => {
-                    if (error) {
-                      console.error('Lambda invocation error', error);
+                lambda.invoke(params, async (error, result) => {
+                  if (error) {
+                    console.error('Lambda invocation error', error);
+                  } else {
+                    const lambdaOutput = JSON.parse(result.Payload);
+                    console.log('Lambda output:', lambdaOutput);
+                
+                    // Use the filename directly from the lambda output
+                    const fileNameFromLambda = lambdaOutput.uniqueCsvFilename;
+                
+                    if (fileNameFromLambda) {
+                      console.log('UNIQUE NAME:', fileNameFromLambda);
+                
+                      // Refactor this to a more reliable method instead of setTimeout
+                      await new Promise(resolve => setTimeout(resolve, 29000));
+                      fetchCsvData(fileNameFromLambda); // Pass the filename directly
                     } else {
-                      const lambdaOutput = JSON.parse(result.Payload);
-                      console.log('Lambda output:', lambdaOutput);
-                      setLambdaOutput(lambdaOutput);
-                      console.log('UNIQUE NAME:', uniqueCsvFilename)
-                      setUniqueCsvFilename(lambdaOutput.uniqueCsvFilename);
-
-                      // Adding a delay of 5 seconds before checking the CSV file
-                      setTimeout(() => {
-                        fetchCsvData();
-                      }, 29000);
+                      console.error('Unique filename not found in lambda response');
                     }
-                  });
+                  }
+                });
 
                 } catch (error) {
                   console.error('Upload error', error);
@@ -88,13 +93,13 @@
                 }
               };
 
-              const fetchCsvData = async () => {
+              const fetchCsvData = async (fileName) => {
                 if (!uniqueCsvFilename) {
                   console.error("CSV filename is empty");
                   return;
                 }
                 try {
-                  const url = `https://videolambdaout.s3.amazonaws.com/${uniqueCsvFilename}`;
+                  const url = `https://videolambdaout.s3.amazonaws.com/${fileName}`;
                   console.log("Requesting URL:", url);
                   const response = await axios.get(url, { responseType: 'text' });
                   console.log(response);
