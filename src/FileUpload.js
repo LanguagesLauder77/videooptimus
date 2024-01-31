@@ -61,27 +61,22 @@
                 };
 
               
-                lambda.invoke(params, async (error, result) => {
-                  if (error) {
-                    console.error('Lambda invocation error', error);
-                  } else {
-                    const lambdaOutput = JSON.parse(result.Payload);
-                    console.log('Lambda output:', lambdaOutput);
-                
-                    // Use the filename directly from the lambda output
-                    const fileNameFromLambda = lambdaOutput.uniqueCsvFilename;
-                
-                    if (fileNameFromLambda) {
-                      console.log('UNIQUE NAME:', fileNameFromLambda);
-                
-                      // Refactor this to a more reliable method instead of setTimeout
-                      await new Promise(resolve => setTimeout(resolve, 29000));
-                      fetchCsvData(fileNameFromLambda); // Pass the filename directly
+                  lambda.invoke(params, (error, result) => {
+                    if (error) {
+                      console.error('Lambda invocation error', error);
                     } else {
-                      console.error('Unique filename not found in lambda response');
+                      const lambdaOutput = JSON.parse(result.Payload);
+                      console.log('Lambda output:', lambdaOutput);
+                      setLambdaOutput(lambdaOutput);
+                      console.log('UNIQUE NAME:', fileName)
+                      setUniqueCsvFilename(lambdaOutput.uniqueCsvFilename);
+
+                      // Adding a delay of 5 seconds before checking the CSV file
+                      setTimeout(() => {
+                        fetchCsvData();
+                      }, 29000);
                     }
-                  }
-                });
+                  });
 
                 } catch (error) {
                   console.error('Upload error', error);
@@ -94,10 +89,7 @@
               };
 
               const fetchCsvData = async (fileName) => {
-                if (!uniqueCsvFilename) {
-                  console.error("CSV filename is empty");
-                  return;
-                }
+                console.log(fileName);
                 try {
                   const url = `https://videolambdaout.s3.amazonaws.com/${fileName}`;
                   console.log("Requesting URL:", url);
