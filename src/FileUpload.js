@@ -68,6 +68,7 @@
                       const lambdaOutput = JSON.parse(result.Payload);
                       console.log('Lambda output:', lambdaOutput);
                       setLambdaOutput(lambdaOutput);
+                      console.log('UNIQUE NAME:', uniqueCsvFilename)
                       setUniqueCsvFilename(lambdaOutput.uniqueCsvFilename);
 
                       // Adding a delay of 5 seconds before checking the CSV file
