@@ -222,24 +222,21 @@
                         <tbody>
                         {csvData.slice(1).map((row, rowIndex) => (
                             <tr key={rowIndex}>
-                                {row.map((cell, cellIndex) => {
-                                    // Check if it is the last cell in the row
-                                    if (cellIndex === row.length - 1) {
-                                        // Split the cell content by spaces and get the first word
-                                        const firstWord = cell.split(' ')[1];
-                                        // Rest of the cell content
-                                        const restOfCell = cell.substring(firstWord.length);
-                                        // Render the first word as a link and the rest as normal text
-                                        return (
-                                            <td key={cellIndex}>
-                                                <a href={firstWord} target="_blank" rel="noopener noreferrer">{firstWord}</a>
-                                                {restOfCell}
-                                            </td>
-                                        );
-                                    } else {
-                                        // Render the cell as normal text
-                                        return <td key={cellIndex}>{cell}</td>;
+                                {row && row.map((cell, cellIndex) => {
+                                    if (cellIndex === row.length - 1 && cell) {
+                                        const words = cell.split(' ');
+                                        if (words.length > 0) {
+                                            const firstWord = words[0];
+                                            const restOfCell = cell.substring(firstWord.length);
+                                            return (
+                                                <td key={cellIndex}>
+                                                    <a href={firstWord} target="_blank" rel="noopener noreferrer">{firstWord}</a>
+                                                    {restOfCell}
+                                                </td>
+                                            );
+                                        }
                                     }
+                                    return <td key={cellIndex}>{cell}</td>;
                                 })}
                             </tr>
                         ))}
