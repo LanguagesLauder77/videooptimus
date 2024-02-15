@@ -228,7 +228,7 @@
                                         // Define the base URL
                                         const baseURL = "https://f.io/snGFLxU4/";
                                         // Create the complete URL by appending the cell content
-                                        const customURL = `${baseURL}${cell}`;
+                                        const customURL = `${baseURL}`;
                                         // Render the cell as a link
                                         return <td key={cellIndex}><a href={customURL} target="_blank" rel="noopener noreferrer">{cell}</a></td>;
                                     } else {
