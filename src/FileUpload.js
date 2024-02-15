@@ -226,7 +226,7 @@
                                     // Check if it is the last cell in the row
                                     if (cellIndex === row.length - 1) {
                                         // Define the base URL
-                                        const baseURL = "https://f.io/snGFLxU4/";
+                                        const baseURL = "https://f.io/Nfx4TBGM/";
                                         // Create the complete URL by appending the cell content
                                         const customURL = `${baseURL}`;
                                         // Render the cell as a link
