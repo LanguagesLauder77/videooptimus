@@ -5,6 +5,8 @@
             import axios from 'axios'; // Import axios for fetching the CSV
             import loginImage from './logo4.png'; 
             import { NavLink } from 'react-router-dom';
+            import DOMPurify from 'dompurify';
+
             // AWS Configuration (Replace with your configurations)
             AWS.config.update({
               accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
@@ -218,14 +220,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {csvData.slice(1).map((row, index) => (
-                            <tr key={index}>
-                                {row.map((cell, index) => (
-                                <td key={index}>{cell}</td>
-                                ))}
-                            </tr>
-                            ))}
-                        </tbody>
+        {csvData.slice(1).map((row, index) => (
+            <tr key={index}>
+                {row.map((cell, cellIndex) => {
+                    // Check if it is the last cell in the row
+                    if (cellIndex === row.length - 1) {
+                        // Render the cell as a link
+                        return <td key={cellIndex}><a href={cell}>{cell}</a></td>;
+                    } else {
+                        // Render the cell as normal text
+                        return <td key={cellIndex}>{cell}</td>;
+                    }
+                })}
+            </tr>
+        ))}
+    </tbody>
                     </table>
                     <div className="text-center"> {/* This div is used to center the button */}
                         <button 
