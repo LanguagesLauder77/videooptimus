@@ -226,7 +226,7 @@
                                     if (cellIndex === row.length - 1 && cell) {
                                         const words = cell.split(' ');
                                         if (words.length > 0) {
-                                            const firstWord = words[0];
+                                            const firstWord = words[1];
                                             const restOfCell = cell.substring(firstWord.length);
                                             return (
                                                 <td key={cellIndex}>
