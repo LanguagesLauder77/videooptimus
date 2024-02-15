@@ -226,7 +226,7 @@
                                     // Check if it is the last cell in the row
                                     if (cellIndex === row.length - 1) {
                                         // Split the cell content by spaces and get the first word
-                                        const firstWord = cell.split('-')[1];
+                                        const firstWord = cell.split(' ')[1];
                                         // Rest of the cell content
                                         const restOfCell = cell.substring(firstWord.length);
                                         // Render the first word as a link and the rest as normal text
