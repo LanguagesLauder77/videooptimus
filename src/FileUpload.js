@@ -222,21 +222,19 @@
                         <tbody>
                         {csvData.slice(1).map((row, rowIndex) => (
                             <tr key={rowIndex}>
-                                {row && row.map((cell, cellIndex) => {
-                                    if (cellIndex === row.length - 1 && cell) {
-                                        const words = cell.split(' ');
-                                        if (words.length > 0) {
-                                            const firstWord = words[1];
-                                            const restOfCell = cell.substring(firstWord.length);
-                                            return (
-                                                <td key={cellIndex}>
-                                                    <a href={firstWord} target="_blank" rel="noopener noreferrer">{firstWord}</a>
-                                                    {restOfCell}
-                                                </td>
-                                            );
-                                        }
+                                {row.map((cell, cellIndex) => {
+                                    // Check if it is the last cell in the row
+                                    if (cellIndex === row.length - 1) {
+                                        // Define the base URL
+                                        const baseURL = "https://f.io/snGFLxU4/";
+                                        // Create the complete URL by appending the cell content
+                                        const customURL = `${baseURL}${cell}`;
+                                        // Render the cell as a link
+                                        return <td key={cellIndex}><a href={customURL} target="_blank" rel="noopener noreferrer">{cell}</a></td>;
+                                    } else {
+                                        // Render the cell as normal text
+                                        return <td key={cellIndex}>{cell}</td>;
                                     }
-                                    return <td key={cellIndex}>{cell}</td>;
                                 })}
                             </tr>
                         ))}
