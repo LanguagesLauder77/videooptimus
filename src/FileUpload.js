@@ -153,8 +153,6 @@
             }
 
 
-
-
               return (
                 <div className="container">
 
@@ -224,7 +222,7 @@
                             <tr key={rowIndex}>
                                 {row.map((cell, cellIndex) => {
                                     // Check if it is the last cell in the row
-                                    if (cellIndex === row.length - 1) {
+                                    if (cellIndex === row.length - 2) {
                                         // Define the base URL
                                         const baseURL = "https://f.io/Nfx4TBGM/";
                                         // Create the complete URL by appending the cell content
