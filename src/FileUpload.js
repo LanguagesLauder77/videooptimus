@@ -210,7 +210,7 @@
                   {csvData.length > 0 && (
                 <div>
                     <table className="table table-striped mt-3 custom-table">
-                        <thead>
+                        <thead className="sticky-header">
                             <tr>
                             {csvData[0].map((header, index) => (
                                 <th key={index}>{header}</th>
