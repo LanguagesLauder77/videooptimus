@@ -209,57 +209,64 @@
 
                   {csvData.length > 0 && (
                 <div>
-                    <table className="table table-striped mt-3 custom-table">
-                        <thead className="sticky-header">
-                            <tr>
-                            {csvData[0].map((header, index) => (
-                                <th key={index}>{header}</th>
-                            ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {csvData.slice(1).map((row, rowIndex) => (
-                            <tr key={rowIndex}>
-                                {row.map((cell, cellIndex) => {
-                                    // Check if it is the last cell in the row
-                                    if (cellIndex === row.length - 2) {
-                                        // Define the base URL
-                                        const baseURL = "https://f.io/Nfx4TBGM/";
-                                        // Create the complete URL by appending the cell content
-                                        const customURL = `${baseURL}`;
-                                        // Render the cell as a link
-                                      //  return <td key={cellIndex}><a href={customURL} target="_blank" rel="noopener noreferrer">{cell}</a></td>;
-                                      return (<td key={cellIndex}>
-                                        <a href={customURL} target="_blank" rel="noopener noreferrer">
-                                    {/* Add color to specific words */}
-                                    {cell.split(' ').map((word, index) => {
-                                        if (word === 'Substantial') {
-                                            return <span key={index} style={{ color: 'red' }}>{word}</span>;
-                                        } else if (word === 'High') {
-                                            return <span key={index} style={{ color: 'orange' }}>{word}</span>;
-                                        } else if (word === 'Medium') {
-                                            return <span key={index} style={{ color: 'yellow' }}>{word}</span>;
-                                        } else if (word === 'Low') {
-                                            return <span key={index} style={{ color: 'blue' }}>{word}</span>;
-                                          } else if (word === 'Negligible') {
-                                            return <span key={index} style={{ color: 'green' }}>{word}</span>;
-                                        } else {
-                                            return <span key={index}>{word}</span>;
-                                        }
-                                    })}
-                                </a>
+                   <table className="table table-striped mt-3 custom-table">
+    <thead className="sticky-header">
+        <tr>
+            {csvData[0].map((header, index) => (
+                <th key={index}>{header}</th>
+            ))}
+        </tr>
+    </thead>
+    <tbody>
+        {csvData.slice(1).map((row, rowIndex) => {
+            const secondLastRowIndex = csvData.length - 2;
+            const lastRowIndex = csvData.length - 1;
+            
+            return (
+                <tr key={rowIndex}>
+                    {row.map((cell, cellIndex) => {
+                        // Check if it is the second last row
+                        if (rowIndex === secondLastRowIndex) {
+                            // Render the cell as a link
+                            return (
+                                <td key={cellIndex}>
+                                    <a href="#">{cell}</a>
                                 </td>
-                                );
+                            );
+                        }
+                        // Check if it is the last row
+                        else if (rowIndex === lastRowIndex) {
+                            // Check for specific words and assign colors
+                            let color = "black"; // default color
+                            if (cell === "Substantial") {
+                                color = "red";
+                            } else if (cell === "Low") {
+                                color = "blue";
+                            } else if (cell === "Medium") {
+                                color = "yellow";
+                            } else if (cell === "High") {
+                                color = "orange";
+                            } else if (cell === "Negligible") {
+                                color = "green";
+                            }
+                            // Render the cell with specified color
+                            return (
+                                <td key={cellIndex}>
+                                    <span style={{ color }}>{cell}</span>
+                                </td>
+                            );
+                        }
+                        // Render the cell as normal text
+                        else {
+                            return <td key={cellIndex}>{cell}</td>;
+                        }
+                    })}
+                </tr>
+            );
+        })}
+    </tbody>
+</table>
 
-                                    } else {
-                                        // Render the cell as normal text
-                                        return <td key={cellIndex}>{cell}</td>;
-                                    }
-                                })}
-                            </tr>
-                        ))}
-                    </tbody>
-                    </table>
                     <div className="text-center"> {/* This div is used to center the button */}
                         <button 
                           onClick={() => exportToCsv('data_export.csv', csvData)} 
