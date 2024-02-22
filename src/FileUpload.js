@@ -228,7 +228,29 @@
                                         // Create the complete URL by appending the cell content
                                         const customURL = `${baseURL}`;
                                         // Render the cell as a link
-                                        return <td key={cellIndex}><a href={customURL} target="_blank" rel="noopener noreferrer">{cell}</a></td>;
+                                      //  return <td key={cellIndex}><a href={customURL} target="_blank" rel="noopener noreferrer">{cell}</a></td>;
+                                      return (<td key={cellIndex}>
+                                        <a href={customURL} target="_blank" rel="noopener noreferrer">
+                                    {/* Add color to specific words */}
+                                    {cell.split(' ').map((word, index) => {
+                                        if (word === 'Substantial') {
+                                            return <span key={index} style={{ color: 'red' }}>{word}</span>;
+                                        } else if (word === 'High') {
+                                            return <span key={index} style={{ color: 'orange' }}>{word}</span>;
+                                        } else if (word === 'Medium') {
+                                            return <span key={index} style={{ color: 'yellow' }}>{word}</span>;
+                                        } else if (word === 'Low') {
+                                            return <span key={index} style={{ color: 'blue' }}>{word}</span>;
+                                          } else if (word === 'Negligible') {
+                                            return <span key={index} style={{ color: 'green' }}>{word}</span>;
+                                        } else {
+                                            return <span key={index}>{word}</span>;
+                                        }
+                                    })}
+                                </a>
+                                </td>
+                                );
+
                                     } else {
                                         // Render the cell as normal text
                                         return <td key={cellIndex}>{cell}</td>;
