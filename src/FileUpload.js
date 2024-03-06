@@ -9,11 +9,12 @@
 
             // AWS Configuration (Replace with your configurations)
             AWS.config.update({
-              accessKeyId: 'AKIAVLCBUVXLDQYL42M2',
-              secretAccessKey: 'yATf6b7s3lJi6f/mZbAPzpzMrl6xhqFQRYW/zZ8W',
+              accessKeyId: 'AKIAVLCBUVXLIDRSSE7F',
+              secretAccessKey: '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',
               region: 'us-east-1'
             });
 
+           
             const s3 = new AWS.S3();
 
             function FileUpload() {
