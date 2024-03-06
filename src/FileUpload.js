@@ -9,8 +9,8 @@
 
             // AWS Configuration (Replace with your configurations)
             AWS.config.update({
-              accessKeyId: 'AKIAVLCBUVXLEGIUGHX4',
-              secretAccessKey: 'AwwEasqBxfkqd6dLTPwyHVnKW6dduJIjOg3MRVET',
+              accessKeyId: 'AKIAVLCBUVXLDQYL42M2',
+              secretAccessKey: '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',
               region: 'us-east-1'
             });
 
