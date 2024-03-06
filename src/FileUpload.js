@@ -9,12 +9,13 @@
 
             // AWS Configuration (Replace with your configurations)
             AWS.config.update({
-              accessKeyId: 'AKIAVLCBUVXLIDRSSE7F',
-              secretAccessKey: '7nZmx1xWJDVRktcmxXlZBP8HIvpYwDdHjnkyWsj6',
+              accessKeyId: 'AKIAVLCBUVXLPN5B6LGY',
+              secretAccessKey: '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',
               region: 'us-east-1'
             });
 
-           
+            
+            
             const s3 = new AWS.S3();
 
             function FileUpload() {
@@ -63,7 +64,9 @@
                     }),
                 };
 
-              
+              console.log(lambda);
+              console.log("Access Key:", AWS.config.credentials.accessKeyId);
+              console.log("Secret Key:", AWS.config.credentials.secretAccessKey);
                   lambda.invoke(params, (error, result) => {
                     if (error) {
                       console.error('Lambda invocation error', error);
