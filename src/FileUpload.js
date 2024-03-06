@@ -8,11 +8,7 @@
             import DOMPurify from 'dompurify';
 
             // AWS Configuration (Replace with your configurations)
-            AWS.config.update({
-              accessKeyId: 'AKIAVLCBUVXLPN5B6LGY',
-              secretAccessKey: '6E3COqDjNAb+kTYJFiN3kxbyp6EwtKs2Uai10XKf',
-              region: 'us-east-1'
-            });
+           
 
             
             
